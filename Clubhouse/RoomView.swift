@@ -38,22 +38,26 @@ var  people :  [Person] = [
 
 struct RoomView: View {
     var body: some View {
-        GeometryReader { geometry in
-            ZStack (alignment:.bottom){
-                ScrollView( showsIndicators: false){
-                    Navbar()
-                    LazyVGrid(columns: columns, spacing: 5) {
-                        ForEach(Array(zip(people.indices, people)), id: \.0) { index, person in
-                            PersonView(name: person.name, showEmoji:person.showEmoji ?? true , image:index + 1 )
-                        }
-                        
-                    }.padding()
+        NavigationView{
+            GeometryReader { geometry in
+                ZStack (alignment:.bottom){
+                    ScrollView( showsIndicators: false){
+                        Navbar()
+                        LazyVGrid(columns: columns, spacing: 5) {
+                            ForEach(Array(zip(people.indices, people)), id: \.0) { index, person in
+                                PersonView(name: person.name, showEmoji:person.showEmoji ?? true , image:index + 1 )
+                            }
+                            
+                        }.padding()
+                    }
+                    
+                    Footer()
                 }
-                
-                Footer()
+                .background(Color("bg")).ignoresSafeArea()
             }
-            .background(Color("bg")).ignoresSafeArea()
+            .navigationBarHidden(true)
         }
+        .navigationBarHidden(true)
     }
 }
 
@@ -63,7 +67,9 @@ struct RoomView: View {
 struct Navbar: View {
     var body: some View {
         HStack{
-            Image(systemName: "chevron.down").font(.title3)
+            NavigationLink(destination:ContentView()){
+                Image(systemName: "chevron.down").font(.title3).foregroundColor(Color.black)
+            }
             Spacer()
             Text("Getting started with SwiftUI")
                 .font(.headline)
@@ -178,13 +184,6 @@ struct PersonView : View {
     
     var body: some View {
         VStack{
-            
-            
-            
-            
-            
-            
-            
             ZStack{
                 Image("\(image)")
                     .resizable()

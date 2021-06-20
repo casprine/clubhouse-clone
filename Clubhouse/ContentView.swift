@@ -25,18 +25,22 @@ var tags : [ITag] = [
 
 struct ContentView: View {
     var body: some View {
-        GeometryReader{ geometry in
-            ZStack(alignment:.bottom){
-                ScrollView(showsIndicators:false){
-                    Header()
-                    Tags()
-                    UpcomingMeeting()
-                    HappeningNow()
-                }
-                
-                TabBar()
-            }.background(Color("bg")).ignoresSafeArea()
+        NavigationView{
+            GeometryReader{ geometry in
+                ZStack(alignment:.bottom){
+                    ScrollView(showsIndicators:false){
+                        Header()
+                        Tags()
+                        UpcomingMeeting()
+                        HappeningNow()
+                    }
+                    
+                    TabBar()
+                }.background(Color("bg")).ignoresSafeArea()
+            }
+            .navigationBarHidden(true)
         }
+        .navigationBarHidden(true)
     }
 }
 
@@ -149,73 +153,85 @@ struct HappeningNow : View {
 
 struct HappendingNowCard: View{
     var body: some View{
-        HStack{
+        NavigationLink(destination: RoomView()){
             HStack{
-                VStack(alignment:.leading){
+                HStack{
                     VStack(alignment:.leading){
-                        Text("Startup club")
-                            .bold()
-                            .textCase(.uppercase)
-                            .frame(maxWidth:.infinity, alignment:.leading)
-                        Text("Pitch your startup ideas to VS & top\nEntrepreneus")
-                            .foregroundColor(Color.gray)
-                            .font(.subheadline)
-                            .padding(.top,1)
-                    }
-                    .padding(.horizontal, 30)
-                    .padding(.top,25)
-                    
-                    HStack{
-                        Image("1")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width:30, height:30)
-                            .padding(2)
-                            .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.random))
-                        
-                        Image("2")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width:30, height:30)
-                            .padding(2)
-                            .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.random))
-                        
-                        
-                        Image("3")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width:30, height:30)
-                            .padding(2)
-                            .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.random))
-                        
-                        
-                        Spacer()
+                        VStack(alignment:.leading){
+                            Text("Startup club")
+                                .bold()
+                                .textCase(.uppercase)
+                                .frame(maxWidth:.infinity, alignment:.leading)
+                                .foregroundColor(Color.black)
+                            Text("Pitch your startup ideas to VS & top")
+                                .foregroundColor(Color.gray)
+                                .font(.subheadline)
+                                .padding(.top,1)
+
+                            Text("Entrepreneus")
+                                .foregroundColor(Color.gray)
+                                .font(.subheadline)
+
+                        }
+                        .padding(.horizontal, 30)
+                        .padding(.top,25)
                         
                         HStack{
-                            Image(systemName: "person.fill")
-                                .font(.subheadline)
-                            Text("354")
-                                .font(.subheadline)
-                            Image(systemName: "mic.fill")
-                                .font(.subheadline)
-                            Text("354")
-                                .font(.subheadline)
+                            Image("1")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width:30, height:30)
+                                .padding(2)
+                                .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.random).opacity(0.5))
+                            
+                            Image("2")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width:30, height:30)
+                                .padding(2)
+                                .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.random).opacity(0.5))
+                            
+                            
+                            Image("3")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width:30, height:30)
+                                .padding(2)
+                                .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.random).opacity(0.5))
+                            
+                            
+                            Spacer()
+                            
+                            HStack{
+                                Image(systemName: "person.fill")
+                                    .font(.subheadline)
+                                    .foregroundColor(Color.black)
+                                Text("354")
+                                    .font(.subheadline)
+                                    .foregroundColor(Color.black)
+                                Image(systemName: "mic.fill")
+                                    .font(.subheadline)
+                                    .foregroundColor(Color.black)
+                                Text("354")
+                                    .font(.subheadline)
+                                    .foregroundColor(Color.black)
+                            }
+                            .padding(.horizontal,10)
+                            .frame(height:35)
+                            .background(Color("bg"))
+                            .cornerRadius(12, antialiased: true)
                         }
-                        .padding(.horizontal,10)
-                        .frame(height:35)
-                        .background(Color("bg"))
-                        .cornerRadius(12, antialiased: true)
+                        .padding(.horizontal, 30)
+                        .padding(.top, 15)
+                        .padding(.bottom, 25)
+                        
                     }
-                    .padding(.horizontal, 30)
-                    .padding(.top, 15)
-                    .padding(.bottom, 25)
-                    
                 }
+                .background(Color("gray.100"))
+                .cornerRadius(30)
             }
-            .background(Color("gray.100"))
-            .cornerRadius(30)
+            .padding(.bottom, 20)
         }
-        .padding(.bottom, 20)
     }
 }
 
