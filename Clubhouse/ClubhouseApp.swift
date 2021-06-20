@@ -11,7 +11,7 @@ import SwiftUI
 struct ClubhouseApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RoomView()
         }
     }
 }
